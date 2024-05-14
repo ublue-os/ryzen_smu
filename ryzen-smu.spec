@@ -16,6 +16,8 @@ Provides: %{name}-kmod-common = %{version}
 Requires: %{name}-kmod >= %{version}
 
 BuildRequires: systemd-rpm-macros
+BuildRequires: make
+BuildRequires: gcc
 
 %description
 A Linux kernel driver that exposes access to the SMU (System Management Unit) for certain AMD Ryzen Processors
@@ -23,7 +25,15 @@ A Linux kernel driver that exposes access to the SMU (System Management Unit) fo
 %prep
 {{{ git_dir_setup_macro }}}
 
+%build
+make -C userspace
+
+%install
+mkdir -p %{buildroot}%{_bindir}
+mv userspace/monitor_cpu %{buildroot}%{_bindir}/monitor_cpu
+
 %files
+%{_bindir}/monitor_cpu
 %doc README.md
 %license LICENSE
 
