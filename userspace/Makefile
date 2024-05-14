@@ -1,7 +1,7 @@
 CC = gcc
 STRIP = strip
 
-CFLAGS = -O3 -mtune=native -march=native
+CFLAGS = -O3
 LDFLAGS = -lm
 
 SFLAGS = --strip-all
